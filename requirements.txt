@@ -1,0 +1,15 @@
+langchain
+langchain-community
+openai
+faiss-cpu
+langchain_openai
+python-dotenv
+langchain_experimental
+pandas
+tabulate
+langchain-openai
+pinecone-client
+pinecone-client[grpc]
+langchain_pinecone
+streamlit
+streamlit-chat
