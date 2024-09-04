@@ -18,7 +18,7 @@ import pinecone
 from dotenv import load_dotenv
 import streamlit as st
 import streamlit_chat 
-
+from langchain_groq import ChatGroq
 global seed 
 
 
@@ -27,8 +27,9 @@ load_dotenv()
 
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+os.environ["OPENAI_API_KEY"] = "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"
 pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
-
+groq_api_key = os.getenv("GROQ_API_KEY")
 
 
 class prompts:
@@ -66,7 +67,19 @@ def generate_vector_store():
 
 def get_conversational_chain(vector_store):
 
-    llm = ChatOpenAI(temperature=0.5)
+    llm = ChatOpenAI(temperature=0.5,model_name="gpt-4o")
+
+    # llama3-70b-8192
+    # llm = ChatGroq(
+    #         temperature=1, 
+    #         groq_api_key = groq_api_key, 
+    #         model_name="llama3-70b-8192",
+    #         max_tokens=150,
+    #     #     top_p=0.95,
+    #     #     frequency_penalty=1,
+    #     #     presence_penalty=1,
+    #     )
+
 
     # llm_chain = LLMChain(llm=llm, prompt=prompts.prompt)
 
@@ -164,17 +177,12 @@ def main():
             st.write("")  # Empty column for spacing
 
 
-    
-        
-
-
-
-       
-
 
     
     streamlit_chat.message("Hi. I'm your friendly Gym Assistant Bot.")
-    streamlit_chat.message("Ask me any Gym related queries and I will do my best to assist you")
+    streamlit_chat.message("Ask me anything about the gym! Just don’t ask me to do any push-ups... I'm already *up* and running!")
+    streamlit_chat.message("If you want to change your workout level and avatar, press the top left arrow and you will have options to make changes")
+
 
     # st.chat_message("assistant", avatar=r"robot.png").write("Hi. I'm your friendly Gym Assistant Bot.")
     # st.chat_message("assistant", avatar=r"robot.png").write("Ask me any Gym related queries and I will do my best to assist you")
