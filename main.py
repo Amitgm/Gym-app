@@ -26,7 +26,7 @@ global seed
 load_dotenv()
 
 
-# os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["OPENAI_API_KEY"] = "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"
 pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
 groq_api_key = os.getenv("GROQ_API_KEY")
