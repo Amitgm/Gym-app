@@ -113,173 +113,191 @@ def stick_it_good():
         unsafe_allow_html=True
     )
 
+
+def show_privacy_policy():
+    st.title("Privacy Policy")
+   
+
+def show_terms_of_service():
+    st.title("Terms of Service")
+   
+
+
 seed = 0
 
 def main():
 
     global seed
 
-    with st.container():
+    page = st.sidebar.selectbox("Choose a page", ["Home", "Privacy Policy", "Terms of Service"])
 
-        st.title("Workout Wizard")
-        stick_it_good()
+    if page == "Privacy Policy":
 
-    with st.sidebar:
+        show_privacy_policy()
 
+    elif page == "Terms of Service":
 
-        if "seed" not in st.session_state:
-             
-             st.session_state.seed = 0
-             
-        
-        # Display the image using the URL
+        show_terms_of_service()
 
-        choose_mode = st.selectbox('Choose Workout Level',["Beginner","Intermediate","Advanced"])
+    else:
 
+        st.write("Welcome to the Home Page")
 
-        st.markdown("<h2 style='text-align: center;'>Choose Your Avatar</h2>", unsafe_allow_html=True)
+        with st.container():
 
-        # st.markdown(f"<h2 style='text-align: center;'>{st.button("Back")}</h2>", unsafe_allow_html=True)
-
-        # Center the buttons using HTML and CSS
-        col1, col2, col3 = st.columns([1, 1, 1])
-
-        
-
-        with col1:
+            st.title("Workout Wizard")
+            stick_it_good()
             
-            st.write("")  # Empty column for spacing
 
-        with col2:
-
-            print(st.session_state.seed)
-
-            choose_Avatar = st.button("Next")
-
-            choose_Avatar_second = st.button("Back")
+        with st.sidebar:
 
 
-            if choose_Avatar:
+            if "seed" not in st.session_state:
+                
+                st.session_state.seed = 0
+                
+            
+            # Display the image using the URL
 
-                st.session_state.seed += 1
-
-            if choose_Avatar_second:
-
-                st.session_state.seed -= 1
-
-            avatar_url = f"https://api.dicebear.com/9.x/adventurer/svg?seed={st.session_state.seed}"
-
-            st.image(avatar_url, caption=f"Avatar {st.session_state.seed }")
-
-        with col3:
-
-            st.write("")  # Empty column for spacing
+            choose_mode = st.selectbox('Choose Workout Level',["Beginner","Intermediate","Advanced"])
 
 
+            st.markdown("<h2 style='text-align: center;'>Choose Your Avatar</h2>", unsafe_allow_html=True)
 
+            # st.markdown(f"<h2 style='text-align: center;'>{st.button("Back")}</h2>", unsafe_allow_html=True)
+
+            # Center the buttons using HTML and CSS
+            col1, col2, col3 = st.columns([1, 1, 1])
+
+            
+
+            with col1:
+                
+                st.write("")  # Empty column for spacing
+
+            with col2:
+
+                print(st.session_state.seed)
+
+                choose_Avatar = st.button("Next")
+
+                choose_Avatar_second = st.button("Back")
+
+
+                if choose_Avatar:
+
+                    st.session_state.seed += 1
+
+                if choose_Avatar_second:
+
+                    st.session_state.seed -= 1
+
+                avatar_url = f"https://api.dicebear.com/9.x/adventurer/svg?seed={st.session_state.seed}"
+
+                st.image(avatar_url, caption=f"Avatar {st.session_state.seed }")
+
+            with col3:
+
+                st.write("")  # Empty column for spacing
+
+
+
+        
+        streamlit_chat.message("Hi. I'm your friendly Gym Assistant Bot.")
+        streamlit_chat.message("Ask me anything about the gym! Just don’t ask me to do any push-ups... I'm already *up* and running!")
+        streamlit_chat.message("If you want to change your workout level and avatar, press the top left arrow and you will have options to make changes")
+
+
+        # st.chat_message("assistant", avatar=r"robot.png").write("Hi. I'm your friendly Gym Assistant Bot.")
+        # st.chat_message("assistant", avatar=r"robot.png").write("Ask me any Gym related queries and I will do my best to assist you")
+
+
+        question = st.chat_input("Ask a question related to your GYM queries")
+
+        # st.chat_input("Type your question here.")
+
+        if "chathistory" not in st.session_state:
+
+            st.session_state.chathistory = None
+
+        if "conversation_chain" not in st.session_state:
+
+            st.session_state.conversation_chain = None
+
+
+        # if question:
     
-    streamlit_chat.message("Hi. I'm your friendly Gym Assistant Bot.")
-    streamlit_chat.message("Ask me anything about the gym! Just don’t ask me to do any push-ups... I'm already *up* and running!")
-    streamlit_chat.message("If you want to change your workout level and avatar, press the top left arrow and you will have options to make changes")
+        if st.session_state.conversation_chain == None:
 
+                vectors = generate_vector_store()
 
-    # st.chat_message("assistant", avatar=r"robot.png").write("Hi. I'm your friendly Gym Assistant Bot.")
-    # st.chat_message("assistant", avatar=r"robot.png").write("Ask me any Gym related queries and I will do my best to assist you")
+                st.session_state.conversation_chain = get_conversational_chain(vectors)
 
+        if st.session_state.chathistory != None:
 
-    question = st.chat_input("Ask a question related to your GYM queries")
+                for i,message in enumerate(st.session_state.chathistory):
 
-    # st.chat_input("Type your question here.")
-
-    if "chathistory" not in st.session_state:
-
-        st.session_state.chathistory = None
-
-    if "conversation_chain" not in st.session_state:
-
-        st.session_state.conversation_chain = None
-
-
-    # if question:
-   
-    if st.session_state.conversation_chain == None:
-
-            vectors = generate_vector_store()
-
-            st.session_state.conversation_chain = get_conversational_chain(vectors)
-
-    if st.session_state.chathistory != None:
-
-            for i,message in enumerate(st.session_state.chathistory):
-
-        
-                if i%2 == 0:
-
-                    # streamlit_chat.message(message.content,is_user=True,avatar="😂")
-                    # st.chat_message("user", avatar=r"cool.png").write(message.content)
-
-                    suffix = f" for {choose_mode} level"
-
-                    # Check if the message ends with the suffix and strip it
-                    if message.content.endswith(suffix):
-
-                        message.content = message.content[:-len(suffix)]
-
-                    # message.content = message.content.strip(f" for {choose_mode} level")
-
-                    print("this is the message content",message.content)
-
-                    streamlit_chat.message(message.content,is_user=True, avatar_style="adventurer",seed=st.session_state.seed)
-
-
-                else:
-
-                    # streamlit_chat.message(message.content,is_user=False)
-
-                    # st.chat_message("assistant", avatar=r"robot.png").write(message.content)
-                    streamlit_chat.message(message.content)
-
-
-                    st.write("--------------------------------------------------")
-
-    if question:
             
-            # st.chat_message("user", avatar=r"cool.png").write(question)
+                    if i%2 == 0:
 
-            streamlit_chat.message(question,is_user=True, avatar_style="adventurer",seed=st.session_state.seed)
+                        # streamlit_chat.message(message.content,is_user=True,avatar="😂")
+                        # st.chat_message("user", avatar=r"cool.png").write(message.content)
+
+                        suffix = f" for {choose_mode} level"
+
+                        # Check if the message ends with the suffix and strip it
+                        if message.content.endswith(suffix):
+
+                            message.content = message.content[:-len(suffix)]
+
+                        # message.content = message.content.strip(f" for {choose_mode} level")
+
+                        print("this is the message content",message.content)
+
+                        streamlit_chat.message(message.content,is_user=True, avatar_style="adventurer",seed=st.session_state.seed)
 
 
-            # streamlit_chat.message(f"{question}",is_user=True)
+                    else:
+
+                        # streamlit_chat.message(message.content,is_user=False)
+
+                        # st.chat_message("assistant", avatar=r"robot.png").write(message.content)
+                        streamlit_chat.message(message.content)
 
 
-            print(question)
+                        st.write("--------------------------------------------------")
 
-            print("------------------------")
+        if question:
+                
+                # st.chat_message("user", avatar=r"cool.png").write(question)
 
-            print(question +" for Beginner level")
+                streamlit_chat.message(question,is_user=True, avatar_style="adventurer",seed=st.session_state.seed)
 
-            question = question + f' for {choose_mode} level'
 
-            response = st.session_state.conversational_chain({"question": question})
+                # streamlit_chat.message(f"{question}",is_user=True)
 
-            st.session_state.chathistory = response["chat_history"]
 
-            streamlit_chat.message(response['answer'])
+                print(question)
 
-           
-            # st.chat_message("assistant", avatar=r"robot.png").write(response['answer'])
+                print("------------------------")
 
-            # streamlit_chat.message(f"{response['answer']}",is_user=False)
+                print(question +" for Beginner level")
+
+                question = question + f' for {choose_mode} level'
+
+                response = st.session_state.conversational_chain({"question": question})
+
+                st.session_state.chathistory = response["chat_history"]
+
+                streamlit_chat.message(response['answer'])
+
+            
+                # st.chat_message("assistant", avatar=r"robot.png").write(response['answer'])
+
+                # streamlit_chat.message(f"{response['answer']}",is_user=False)
 
 
 
 if __name__ == "__main__":
 
     main()
-
-
-
-
-
-
-
