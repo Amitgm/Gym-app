@@ -38,7 +38,7 @@ To get started with the Gym App, follow these steps:
 
 6. Run the application:
    ```bash
-   streamlit run app.py
+   streamlit run main.py
 
 ## Usage
 
