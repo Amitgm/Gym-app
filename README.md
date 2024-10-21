@@ -20,6 +20,7 @@ Add the following lines to your `.env` file:
 OPENAI_API_KEY = "{ OPENAI_API_KEY }"
 
 PINECONE_API_KEY = "{ PINECONE_API_KEY }"
+
 example  PINECONE_API_KEY = "02f59c2f-5ff8-49ab-b6d1-eb7a357aa1da"
 
 ## Installation
