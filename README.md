@@ -20,11 +20,11 @@ To get started with the Gym App, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/gym-app.git
+   git clone https://github.com/yourusername/Gym-app.git
 
 2. Navigate into the project directory:
    ```bash
-   cd gym-app
+   cd Gym-app
 
 3. Create and activate a virtual environment:
    ```bash
