@@ -23,16 +23,16 @@ To get started with the Gym App, follow these steps:
    git clone https://github.com/yourusername/gym-app.git
 
 2. Navigate into the project directory:
-  ```bash
+   ```bash
   cd gym-app
 
 3. Create and activate a virtual environment:
-  ```bash
+   ```bash
   cd Gym-app\gym_rag\Scripts
   activate
 
 4. Install the required packages:
-  ```bash
+   ```bash
    pip install -r requirements.txt
 
 6. Run the application:
