@@ -11,9 +11,14 @@ a choose avatar feature to select your avatar when communicating with the applic
 - Streamlit for web framework
 
 ## Requirements
-
+Create a .env file and place the following api keys inside:
 - openai api key 
 - Pinecone api key
+
+Add the following lines to your `.env` file:
+
+OPENAI_API_KEY = "{ OPENAI_API_KEY }"
+PINECONE_API_KEY = "{ PINECONE_API_KEY }"
 
 ## Installation
 To get started with the Gym App, follow these steps:
