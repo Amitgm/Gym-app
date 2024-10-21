@@ -33,6 +33,7 @@ To get started with the Gym App, follow these steps:
 
 4. Install the required packages:
    ```bash
+   cd back into Gym-app
    pip install -r requirements.txt
 
 6. Run the application:
