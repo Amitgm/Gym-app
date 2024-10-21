@@ -24,12 +24,12 @@ To get started with the Gym App, follow these steps:
 
 2. Navigate into the project directory:
    ```bash
-  cd gym-app
+   cd gym-app
 
 3. Create and activate a virtual environment:
    ```bash
-  cd Gym-app\gym_rag\Scripts
-  activate
+   cd Gym-app\gym_rag\Scripts
+   activate
 
 4. Install the required packages:
    ```bash
