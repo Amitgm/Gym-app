@@ -10,6 +10,14 @@ a choose avatar feature to select your avatar when communicating with the applic
 - Pinecone Database
 - Streamlit for web framework
 
+
+<div align="center">
+    <img src="./Images/text-summarization.png" alt="Summarization Results" width="1200">
+    <p><em>Text Summarizer.</em></p>
+</div>
+
+
+
 ## Requirements
 Create a .env file and place the following api keys inside:
 - openai api key 
