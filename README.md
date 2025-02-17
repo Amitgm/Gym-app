@@ -12,8 +12,8 @@ a choose avatar feature to select your avatar when communicating with the applic
 
 
 <div align="center">
-    <img src="./Images/text-summarization.png" alt="Summarization Results" width="1200">
-    <p><em>Text Summarizer.</em></p>
+    <img src="./Images/workout-wizard.png" alt="Summarization Results" width="1200">
+    <p><em>Gym Chat app</em></p>
 </div>
 
 
