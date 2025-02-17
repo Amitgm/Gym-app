@@ -13,7 +13,7 @@ a choose avatar feature to select your avatar when communicating with the applic
 
 <div align="center">
     <img src="./Images/workout-wizard.png" alt="Summarization Results" width="1200">
-    <p><em>Gym Chat app</em></p>
+    <p><em>Gym Chat App</em></p>
 </div>
 
 
