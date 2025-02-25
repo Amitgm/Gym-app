@@ -4,6 +4,8 @@
 The Gym App is a comprehensive fitness application designed to enhance your workout experience using GENAI capabilities. It offers various workout routines for users based on the workout level selected. It also has
 a choose avatar feature to select your avatar when communicating with the application.
 
+Link to the App : https://gym-app-gzpk4yfnbhlwwrkehnqhkr.streamlit.app/
+
 ## Technologies Used
 - Python 3.10
 - GPT-4o
