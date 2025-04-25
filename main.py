@@ -20,13 +20,16 @@ import streamlit as st
 import streamlit_chat 
 from langchain_groq import ChatGroq
 global seed 
+from pinecone import Pinecone
 
 
 
 load_dotenv()
 
 
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+
 pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
 # groq_api_key = os.getenv("GROQ_API_KEY")
 
