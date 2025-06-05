@@ -14,3 +14,4 @@ langchain_pinecone
 streamlit
 streamlit-chat
 langchain_groq
+pinecone
